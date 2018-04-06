@@ -6,6 +6,7 @@ form {
         .form-item {
             @extend .row;
             align-items: center;
+            margin-top: 1em;
 
             &:first-child {
                 margin-top: 0;
@@ -15,6 +16,17 @@ form {
         .item-label,
         .item-field {
             @include make-col-ready;
+        }
+
+        .item-field {
+            input,
+            textarea,
+            select,
+            .select2 {
+                &:last-child {
+                    margin: 0;
+                }
+            }
         }
 
         @include media-breakpoint-up(md) {
@@ -157,6 +169,10 @@ form {
             background-color: $blue;
         }
     }
+
+        .select2-results__options {
+            @extend .plain-list;
+        }
 
     label {
         font-weight: normal;

@@ -108,18 +108,47 @@ BLOCKS
 }
 
 
-.link-list {
-	li {
-		font-size: $medium-text;
-		padding: 0.5em 0;
+.link-item {
+	padding: 2em 0;
+	border-top: 1px solid $grey;
 
-		&:before {
-			content: none;
+	&:first-child {
+		border: 0;
+	}
+
+	.link-image {
+		border-radius: 5px;
+		overflow: hidden;
+		max-height: 100px;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+	}
+
+	.link-content {
+		a {
+			font-weight: bold;
 		}
 
-		.link-title {
-			font-weight: bold;
-			text-transform: uppercase;
+		> *:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		display: flex;
+		align-items: center;
+
+		.link-image {
+			flex: 0 0 150px;
+			margin-right: 2em;
+		}
+
+		.link-content {
+			flex-grow: 1;
 		}
 	}
 }

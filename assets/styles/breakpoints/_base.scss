@@ -78,38 +78,59 @@ object {
 	display: block;
 }
 
-$li-padding: 1em;
+$li-padding: 1.25em;
 ol:not(.plain-list),
 ul:not(.plain-list) {
+	counter-reset: num;
+
+	ol,
+	ul {
+		margin: 0;
+	}
+
 	li {
-		padding-left: $li-padding;
+		position: relative;
 
 		&:before {
 			display: inline-block;
-			margin-left: -$li-padding;
-			margin-right: calc(#{$li-padding} - 6px);
 		}
 	}
 }
 
-ol {
-	counter-reset: num;
+ol:not(.plain-list) {
+	li {
+		padding-left: $li-padding + 0.5em;
+	}
 
-	li:before {
+	> li:before {
+		position: absolute;
+		left: 0;
+		width: $li-padding;
+		text-align: right;
 		content: counter(num) '.';
 		counter-increment: num;
 	}
 }
 
 ul:not(.plain-list) {
-	li:before {
+	li {
+		padding-left: $li-padding;
+	}
+
+	> li:before {
 		content: '';
 		width: 0; 
 		height: 0;
+		margin-left: -$li-padding;
+		margin-right: calc(#{$li-padding} - 6px);
 		border-top: 6px solid transparent;
 		border-bottom: 6px solid transparent;
-		border-left: 6px solid $red;
+		border-left: 6px solid $blue;
 	}
+}
+
+.plain-list {
+
 }
 
 hr {
@@ -424,6 +445,7 @@ body {
 			[class*="image-"] {
 				@include overlay;
 				background-size: cover;
+				opacity: 0;
 				animation: slideshow 18s linear infinite 0s;
 
 				@for $image from 1 through 3 {
