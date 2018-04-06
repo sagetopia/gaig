@@ -232,6 +232,13 @@ gulp.task('jshint', function() {
     .pipe(gulpif(enabled.failJSHint, jshint.reporter('fail')));
 });
 
+// ### Do a simple page refresh
+// `gulp jshint` - Lints configuration JSON and project JS.
+gulp.task('bs-reload', function (done) {
+    browserSync.reload();
+    done();
+});
+
 // ### Clean
 // `gulp clean` - Deletes the build folder entirely.
 gulp.task('clean', require('del').bind(null, [path.dist]));
@@ -252,6 +259,7 @@ gulp.task('watch', function() {
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
   gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
+  gulp.watch(['**/*/*.html'], ['bs-reload']);
 });
 
 // ### Build

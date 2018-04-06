@@ -18,95 +18,29 @@
 	HEADER
 	*********************/
 
-	label[for="nav-trigger"] {
-		display: none;
-	}
-
 	.site-header {
-		padding: 0;
-		border-top: 30px solid $red;
-		background-color: $blue;
-
-	  	.header-main {
-	  		padding: 0;
-	  	}
-
-	  	.site-logo {
-	  		position: absolute;
-	  		top: -30px;
-	  		z-index: 1;
-	  		background-color: $white;
-	  		padding: 1.5em;
-	  		text-align: center;
-  			justify-content: center;
-  			border-bottom-left-radius: 1em;
-  			border-bottom-right-radius: 1em;
-
-	  		.logo {
-	  			height: 100px;
-	  		}
-	  	}
-	}
-
-	  	.main-nav {
-	  		padding: 0.5em $grid-gutter-width;
-
-	  		.nav {
-	  			position: static;
-			    display: flex;
-			    background-color: transparent;
-			    flex-direction: row;
-			    align-items: center;
-			    justify-content: flex-end;
-			    height: 100%;
-
-		  		li {
-		  			opacity: 1;
-		  			transform: none;
-		  			flex-grow: 0;
-
-		  			a {
-		  				color: $white;
-		  				font-size: $medium-text;
-		  				padding: 1em;
-		  				@include font-smooth;
-
-			  			&:hover {
-			  				color: lighten($red, 10%);
-			  			}
-			  		}
-		  		}
-	  		}
-	  	}
-
-		.preheader {
-			display: block;
-			background-color: $blue;
-
-			.nav {
-				justify-content: flex-end;
-				
-				li a {
-					color: $white;
-					line-height: 1;
-					padding: 0.75em 1em 1em;
-					font-weight: bold;
-					@include font-smooth;
-				}
-
-				.account a {
-					font-weight: normal;
-				}
-
-				.login a {
-					background-color: $green;
-
-					&:hover {
-						background-color: darken($green, 5%);
-					}
-				}
+		.header-inner {
+			&::before {
+				right: percentage(1/2);
 			}
 		}
+
+		.site-logo {
+			border-right: 1px solid $grey;
+
+			.logo {
+				height: 75px;
+			}
+		}
+
+		.main-nav .nav {
+			top: calc(#{$logo-height-md} + 2em);
+		}
+	}
+
+	#nav-trigger:checked + .site-header .main-nav .nav {
+		height: calc(100vh - #{$logo-height-md} - 2em);
+	}
 
 
 	/*********************
@@ -114,18 +48,14 @@
 	*********************/
 
 	.page-header {
-		padding-top: 3em 0;
-	}
+		max-height: 300px;
+		padding-bottom: 3em;
+		background-image: url(../images/bg-town@2x.png);
 
-
-	/*********************
-	BLOCKS
-	*********************/
-
-	.how-to {
-		li {
-			.icon {
-				flex: 0 0 150px;
+		@each $image in $bg-images {
+			&.image-#{$image},
+			.image-#{$image} {
+				background-image: url(../images/bg-#{$image}@2x.png);
 			}
 		}
 	}
@@ -136,8 +66,10 @@
 	*********************/
 
 	.site-footer {
-		padding: 3em 0;
-
+		a:hover {
+			color: $red;
+		}
+		
 		.footer-menu {
 			a {
 				padding: 0 0 0 2em;

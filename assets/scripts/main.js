@@ -16,15 +16,9 @@
         	$(this).removeClass('active');
         });
 
-        $('.login a').on('click', function(e) {
-            e.preventDefault();
-            var scrolltop = $('#login').offset().top - $('.site-header').outerHeight();
-            $("html, body").animate({ scrollTop: scrolltop }, 600);
-            return false;
-        });
-
         $('select').each(function() {
-            var placeholder = $(this).attr('placeholder');
+            var placeholder = $(this).attr('placeholder') || 'Select an option';
+         
             $(this).select2({ 
                 placeholder: placeholder,
                 minimumResultsForSearch: 5,

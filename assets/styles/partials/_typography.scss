@@ -21,7 +21,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     font-weight: 500;
     letter-spacing: 1px;
     line-height: 1.2;
-    margin: 0 0 0.5em;
+    margin: 1.5em 0 0.5em;
+
+    .sidebar & {
+        font-weight: 400;
+    }
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 h1, .h1 {
@@ -46,6 +54,7 @@ h5, .h5 {
 
 h6, .h6 {
     font-size: $h6;
+    letter-spacing: 0;
 }
 
 p, ol, ul {
@@ -63,47 +72,44 @@ p {
     hyphens: none;
 }
 
+.site-title,
+.section-title,
+.block-title,
+.sidebar-title {
+    text-align: center;
+}
+
 .site-title {
     font-weight: bold;
     letter-spacing: 1px;
     margin: 0;
     line-height: 1;
 
-    span {
+    small {
         display: block;
-        font-weight: 300;
-        @include font-smooth-reset;
+        font-size: 0.4em;
+        margin-bottom: 0.5em;
     }
 
     @include media-breakpoint-up(md) {
         font-size: 3em;
     }
-}
 
-.site-subtitle {
-    font-size: 1.45em;
-    margin-top: 0.5em;
-    font-weight: 500;
-
-    @include media-breakpoint-up(md) {
-        font-size: $h2;
+    @include media-breakpoint-up(lg) {
+        font-size: 4em;
     }
 }
 
 .section-title {
-    font-size: $h1;
+    font-weight: normal;
+    margin-bottom: 1em;
 }
 
-.box-title {
-    font-size: $medium-text;
-    text-transform: uppercase;
-    color: $white;
-    background-color: $blue;
-    margin: 0;
-    padding: 1em;
-    font-family: $body;
+.block-title {
+    font-weight: normal;
+    color: $blue;
+    margin: 0 0 1em;
 }
-
 
 .large-text {
     font-size: $large-text;

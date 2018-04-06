@@ -1,31 +1,31 @@
 
 body {
-    &:before {
-        content: '';
-        display: block;
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        background-color: $white;
-        background-size: 300px auto, 100%;
-        background-repeat: no-repeat;
-        background-position: center center;
-        z-index: 999;
-        opacity: 1;
-        transition: all 0.3s ease-out;
-    }
+	&:before {
+		content: '';
+		display: block;
+		position: fixed;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		background-color: $white;
+		background-size: 300px auto, 100%;
+		background-repeat: no-repeat;
+		background-position: center center;
+		z-index: 999;
+		opacity: 1;
+		transition: all 0.3s ease-out;
+	}
 
-    &.scroll-lock {
-    	overflow: hidden;
-    }
+	&.scroll-lock {
+		overflow: hidden;
+	}
 }
 
 .loaded:before,
 .no-js body:before {
-    opacity: 0;
-    z-index: -1;
+	opacity: 0;
+	z-index: -1;
 }
 
 /*********************
@@ -43,6 +43,7 @@ NAV STYLES
 *********************/
 
 .nav {
+	@extend .plain-list;
 	flex-direction: column;
 	margin: 0;
 	font-size: $normal-text;
@@ -78,14 +79,15 @@ object {
 }
 
 $li-padding: 1em;
-ol, ul {
+ol:not(.plain-list),
+ul:not(.plain-list) {
 	li {
 		padding-left: $li-padding;
 
 		&:before {
 			display: inline-block;
 			margin-left: -$li-padding;
-	    	margin-right: calc(#{$li-padding} - 6px);
+			margin-right: calc(#{$li-padding} - 6px);
 		}
 	}
 }
@@ -99,7 +101,7 @@ ol {
 	}
 }
 
-ul {
+ul:not(.plain-list) {
 	li:before {
 		content: '';
 		width: 0; 
@@ -110,6 +112,18 @@ ul {
 	}
 }
 
+hr {
+	width: 80%;
+	height: 1px;
+	margin: 2em auto;
+	border: 0;
+
+	&::before {
+		content: '';
+		display: block;
+		border-top: 1px solid $grey;
+	}
+}
 
 /*********************
 SITE HEADER
@@ -150,7 +164,7 @@ label[for="nav-trigger"] {
 			width: $span-width;
 			top: $trigger-height / 2 - $span-height / 2;
 			left: ($trigger-width - $span-width) / 2;
-			background-color: $blue;
+			background-color: $white;
 		}
 
 		&:nth-child(2) {
@@ -178,62 +192,79 @@ label[for="nav-trigger"] {
 }
 
 .site-header {
-  	background-color: $white;
+	background-color: $blue;
+	// @include box-shadow;
+	border-bottom: 1px solid $blue;
+	z-index: 1;
 
-  	.header-main {
-  		padding: $header-padding 0;
-  	}
+	.header-inner {
+		padding: $header-padding 0;
 
-  	.site-logo {
-  		display: flex;
-  		align-items: center;
-  		
-  		.logo {
-  			display: block;
-  			width: auto;
-  			max-width: 100%;
-  			height: 60px;
-  			pointer-events: none;
-	  	}
+		&::before,
+		&::after {
+			content: '';
+			@include overlay;
+			background-color: $white;
+			width: 100%;
+			left: auto;
+		}
+
+		&::before {
+			right: percentage(1/3);
+			transform: skew(-35deg);
+		}
+
+		&::after {
+			right: 100%;
+		}
+	}
+
+	.site-logo {
+		display: flex;
+		align-items: center;
+		
+		.logo {
+			display: block;
+			width: auto;
+			max-width: 100%;
+			height: 50px;
+			pointer-events: none;
+		}
 	}
 }
 	
-  	.main-nav {
-  		.nav {
-  			position: fixed;
-  			overflow: hidden;
-  			background-color: transparentize($white, 0.05);
-		    height: 0;
-		    top: calc(#{$logo-height} + 2em);
-		    right: 0;
-		    left: 0;
-		    transition: height $transition-time $ease-in-out-cube;
-		    flex-direction: column;
-		    z-index: 1;
+	.main-nav {
+		.nav {
+			position: fixed;
+			overflow: hidden;
+			background-color: transparentize($white, 0.05);
+			height: 0;
+			top: calc(#{$logo-height} + 2em);
+			right: 0;
+			left: 0;
+			transition: height $transition-time $ease-in-out-cube;
+			flex-direction: column;
+			z-index: 1;
 
-	  		li {
+			li {
 				opacity: 0; 
 				transform: scale(1.1) translateY(-24px);
 				transition: opacity $transition-time ease-out, transform $transition-time ease-out;
 
-	  			a {
-	  				color: $black;
-		  			font-size: $large-text;
-		  			font-weight: 600;
-		  			text-align: center;
-		  		}
+				a {
+					color: $blue;
+					font-size: $large-text;
+					font-weight: 600;
+					text-align: center;
+				}
 
-		  		@for $li from 1 through $lis {
+				@for $li from 1 through $lis {
 					&:nth-child(#{$li}) {
 						transition-delay: $transition-time - ($li * $transition-offset), $transition-time - ($li * $transition-offset);
 					}
 				}
-	  		}
-  		}
-  	}
-
-	.preheader {
-		display: none;
+			}
+		}
 	}
 
 
@@ -241,7 +272,7 @@ label[for="nav-trigger"] {
 	position: absolute;
 	clip: rect(0,0,0,0);
 
-	@include media-breakpoint-down(sm) {
+	@include media-breakpoint-down(md) {
 		&:checked + .site-header {
 			label[for="nav-trigger"] {
 				span:nth-child(2) {
@@ -264,7 +295,7 @@ label[for="nav-trigger"] {
 			}
 
 			.main-nav .nav {
-				height: 100vh;
+				height: calc(100vh - #{$logo-height} - 2em);
 				overflow: scroll;
 
 				li {
@@ -294,12 +325,11 @@ PAGE HEADER
 	justify-content: flex-end;
 	color: $white;
 	@include font-smooth;
-	text-shadow: 1px 1px 10px transparentize($black, 0.75);
+	text-shadow: 1px 1px 10px transparentize($black, 0.15);
 	overflow: hidden;
 	height: 100vh;
-	max-height: 370px;
-	background: center no-repeat $grey;
-	background-size: cover;
+	max-height: 200px;
+	background: url(../images/bg-town.png) center / cover no-repeat $grey;
 	padding: 2em 0;
 
 	&:before {
@@ -308,29 +338,19 @@ PAGE HEADER
 		background-color: transparentize($black, 0.9);
 	}
 
-	// &.heroic {
-	// 	height: 100vh;
-	// 	max-height: 1000px;
-	// 	background-image: url(../images/heroic-home-mountains.jpg);
-	// 	padding: calc(#{$header-padding * 2} + #{$logo-height}) 0 0;
+	&.heroic {
+		height: auto;
+		flex-grow: 1;
+		max-height: none;
+		justify-content: center;
+	}
 
-	// 	.site-title {
-	// 		margin-bottom: 0.5em;
-	// 	}
-
-	// 	.site-subtitle {
-	// 		padding: 0.25em 0.5em 0.5em;
-	// 		background: $med-blue;
-	// 		line-height: 1;
-	// 		margin-bottom: 1em;
-	// 	}
-	// }
-
-	// @for $header from 1 through 4 {
-	// 	&.page-header-#{$header} {
-	// 		background-image: url(../images/page-header-bg-#{$header}.jpg);
-	// 	}
-	// }
+	@each $image in $bg-images {
+		&.image-#{$image},
+		.image-#{$image} {
+			background-image: url(../images/bg-#{$image}.png);
+		}
+	}
 }
 
 
@@ -339,10 +359,14 @@ FOOTER
 *********************/
 
 .site-footer {
-	background-color: $blue;
+	background-color: $dark-blue;
 	color: $white;
 	padding: 2em 0;
 	@include font-smooth;
+
+	a {
+		color: inherit;
+	}
 
 	.footer-menu {
 		margin-bottom: 1em;
@@ -369,7 +393,7 @@ FOOTER
 			align-items: center;
 		}
 
-	  	.colophon p {
+		.colophon p {
 			padding-bottom: 0;
 			margin: 0;
 		}
@@ -380,14 +404,38 @@ FOOTER
 PAGES
 *********************/
 
-.home {
-	.page-header {
-		background-image: url(../images/heroic-home.jpg);
+body {
+	&.login,
+	&.contact,
+	&.home {
+		@extend .modal-screen;
 	}
 }
 
-.benefits-and-tools {
+.home .wrap {
+	display: flex;
+
 	.page-header {
-		background-image: url(../images/heroic-benefits-tools.jpg);
+		background: $black;
+
+		.slideshow {
+			@include overlay;
+
+			[class*="image-"] {
+				@include overlay;
+				background-size: cover;
+				animation: slideshow 18s linear infinite 0s;
+
+				@for $image from 1 through 3 {
+					&:nth-child(#{$image}) {
+						animation-delay: ($image - 1) * 6s;
+					}
+				}
+			}
+		}
+	}
+
+	.site-title {
+		margin-bottom: 2em;
 	}
 }

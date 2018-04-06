@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-		<title>Home | GAIG Portal</title>
+		<title>Login | GAIG Portal</title>
 
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
@@ -21,7 +21,7 @@
 		<!-- Drop Analytics -->
 	</head>
 
-	<body class="home">
+	<body class="login">
 		<input type="checkbox" id="nav-trigger" class="nav-trigger">
 		<header class="site-header">
 			<div class="container">
@@ -52,55 +52,24 @@
 			</div>
 		</header>
 
-		<div class="wrap">
-			<header class="page-header heroic">
-				<div class="slideshow">
-					<div class="image-town"></div>
-					<div class="image-kids"></div>
-					<div class="image-family"></div>
-				</div>
+		<div class="wrap bg-slash">
+			<main>
 				<div class="container">
-					<h1 class="site-title">
-						<small>GAIG Public Sector Division</small>
-						Risk Resources
-					</h1>
+					<section>
+						<div class="block center-block">
+							<h1 class="block-title">Login</h1>
 
-					<div class="sector-menu">
-						<a href="/schools" class="icon-box">
-							<div class="col-inner">
-								<div class="col-icon">
-									<img src="/dist/images/icon-schools.svg" width="150" height="150" alt="Schools icon" />
-								</div>
-								<div class="col-content centered">
-									<h3 class="col-title">Schools</h3>
-								</div>
-							</div>
-						</a>
-						
-						<a href="/municipalities" class="icon-box">
-							<div class="col-inner">
-								<div class="col-icon">
-									<img src="/dist/images/icon-municipalities.svg" width="150" height="150" alt="Municipalities icon" />
-								</div>
-								<div class="col-content centered">
-									<h3 class="col-title">Municipalities</h3>
-								</div>
-							</div>
-						</a>
-
-						<a href="/districts" class="icon-box">
-							<div class="col-inner">
-								<div class="col-icon">
-									<img src="/dist/images/icon-districts.svg" width="150" height="150" alt="Districts icon" />
-								</div>
-								<div class="col-content centered">
-									<h3 class="col-title">Service Districts</h3>
-								</div>
-							</div>
-						</a>
-					</div>
+							<form class="login-form">
+								<input id="user-email" name="user-email" type="email" placeholder="Email" />
+								<input id="user-pass" name="user-pass" type="password" placeholder="Password" />
+								<input id="remember-login" name="remember-login" class="checkbox" type="checkbox" value="true" />
+								<label for="remember-login" class="checkbox-label">Remember Me</label>
+								<input type="submit" value="Submit" />
+							</form>
+						</div>
+					</section>
 				</div>
-			</header>
+			</main>
 		</div>
 
 		<footer class="site-footer">
