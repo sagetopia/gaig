@@ -1,1 +1,1 @@
-# UJA Portal Pages
+# GAIG Portal Pages
